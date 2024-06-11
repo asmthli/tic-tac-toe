@@ -5,3 +5,6 @@ class Grid:
 
     def place_marker(self, player, x, y):
         pass
+
+    def get_marker(self, x, y):
+        return "X"

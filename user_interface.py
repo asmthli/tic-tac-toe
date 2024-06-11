@@ -1,3 +1,4 @@
+from grid import Grid
 from player import Player
 
 
@@ -34,3 +35,21 @@ def ask_play_again() -> bool:
         print("Please input a valid answer 'y' or 'n'.")
         return ask_play_again()
 
+
+def make_grid_cell(fill: str = "") -> str:
+    return f"|{fill}|"
+
+
+def show_grid(grid: Grid) -> None:
+    print("---" * grid.width)
+
+    for j in range(grid.height):
+        row = ""
+        for i in range(grid.width):
+            mark = grid.get_marker(i, j)
+            row += make_grid_cell(mark)
+        print(row)
+        print("---" * grid.width)
+
+
+show_grid(Grid(3, 3))
