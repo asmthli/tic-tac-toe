@@ -10,9 +10,6 @@ class Grid:
     def place_marker(self, player_, x, y) -> None:
         self.array[y][x] = player_.marker
 
-    def get_marker(self, x, y) -> str:
-        return self.array[y][x]
-
     def check_diagonal_win(self, x: int, y: int) -> bool:
         placed_marker = self.array[y][x]
         if x != y:

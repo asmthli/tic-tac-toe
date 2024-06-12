@@ -82,6 +82,6 @@ def show_grid(grid: Grid) -> None:
     for j in range(grid.size):
         row = ""
         for i in range(grid.size):
-            mark = grid.get_marker(i, j)
+            mark = grid.array[j][i]
             row += make_grid_cell(mark)
         print(row)
