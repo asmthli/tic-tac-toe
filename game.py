@@ -5,13 +5,13 @@ import random
 
 
 class Game:
-    def __init__(self):
+    def __init__(self) -> None:
         self.players = None
         self.grid = None
         self.current_player = None
         self.setup()
 
-    def setup(self):
+    def setup(self) -> None:
         user_interface.show_welcome()
         user_interface.show_instructions()
         player1_marker, player2_marker = user_interface.get_player_markers()
@@ -20,10 +20,10 @@ class Game:
         self.grid = Grid(size)
         self.current_player = random.choice(self.players)
 
-    def reset(self):
+    def reset(self) -> None:
         self.grid = Grid(self.grid.size)
 
-    def start(self):
+    def start(self) -> None:
         user_interface.show_begin()
         user_interface.show_grid(self.grid)
 

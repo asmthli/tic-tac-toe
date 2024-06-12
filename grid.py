@@ -1,5 +1,5 @@
 class Grid:
-    def __init__(self, size):
+    def __init__(self, size: int) -> None:
         self.size = size
         self.total_cells = size * size
         self.array = []
@@ -7,10 +7,10 @@ class Grid:
             self.array.append(['_'] * size)
         self.markers_placed = 0
 
-    def place_marker(self, player_, x, y):
+    def place_marker(self, player_, x, y) -> None:
         self.array[y][x] = player_.marker
 
-    def get_marker(self, x, y):
+    def get_marker(self, x, y) -> str:
         return self.array[y][x]
 
     def check_diagonal_win(self, x: int, y: int) -> bool:
