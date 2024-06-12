@@ -13,7 +13,7 @@ def show_instructions() -> None:
 
 
 def show_begin() -> None:
-    print("The game will now begin!\n")
+    print("The game will now begin!")
 
 
 def show_game_over(player1: Player, player2: Player) -> None:
@@ -46,19 +46,20 @@ def get_player_markers() -> tuple[str, str]:
 
 
 def ask_player_place_marker(player: Player, grid: Grid) -> tuple[int, int]:
-    marker_placement_regex = "[0-9]+, [0-9]+"
+    marker_placement_regex = "[0-9]+,[0-9]+"
 
-    marker_position = input(f"Player {player.number}, where would you like to place a marker? (row, column): ")
+    marker_position = input(f"Player {player.number}, where would you like to place a marker? (column,row): ")
+    # Players should give 1-based indices. Converted here to be used 0-based throughout program.
     if re.search(marker_placement_regex, marker_position):
-        x = int(marker_position.split(',')[0].strip())
-        y = int(marker_position.split(',')[1].strip())
+        x = int(marker_position.split(',')[0].strip()) - 1
+        y = int(marker_position.split(',')[1].strip()) - 1
         if 0 <= x < grid.size and 0 <= y < grid.size:
             return x, y
         else:
             print("\nInvalid input. Ensure your numbers indices are within the grid size.\n")
             return ask_player_place_marker(player, grid)
     else:
-        print("\nInvalid input. Please input in the form row, column.\n")
+        print("\nInvalid input. Please input in the form column, row.\n")
         return ask_player_place_marker(player, grid)
 
 
@@ -78,12 +79,9 @@ def make_grid_cell(fill: str = "") -> str:
 
 
 def show_grid(grid: Grid) -> None:
-    print("---" * grid.size)
-
     for j in range(grid.size):
         row = ""
         for i in range(grid.size):
             mark = grid.get_marker(i, j)
             row += make_grid_cell(mark)
         print(row)
-        print("---" * grid.size)
