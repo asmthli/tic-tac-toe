@@ -15,7 +15,8 @@ class Game:
         user_interface.show_welcome()
         user_interface.show_instructions()
         player1_marker, player2_marker = user_interface.get_player_markers()
-        self.players = [Player(number=1, marker=player1_marker), Player(number=2, marker=player2_marker)]
+        self.players = [Player(number=1, marker=player1_marker),
+                        Player(number=2, marker=player2_marker)]
         size = user_interface.get_grid_size()
         self.grid = Grid(size)
         self.current_player = random.choice(self.players)
