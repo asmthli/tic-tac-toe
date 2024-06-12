@@ -11,18 +11,33 @@ def show_instructions() -> None:
           " markers.\n")
 
 
+def show_begin() -> None:
+    print("The game will now begin!")
+
+
 def show_game_over(player1: Player, player2: Player) -> None:
     print(f"GAME OVER! Score: P1: {player1.score} P2: {player2.score}")
 
 
-def get_grid_size() -> tuple[int, int]:
+def get_grid_size() -> (int, int):
     rows = int(input("How many rows would you like your grid to have?: "))
     columns = int(input("How many columns would you like your grid to have?: "))
     return rows, columns
 
 
-def get_player_marker(player_num: int) -> None:
-    marker = input(f"Player {player_num} - What would you like your mark to be? (x/o): ")
+def get_player_markers() -> tuple[str, str]:
+    # TODO Check length of marker - don't let user input a massive string.
+    player1_marker = input(f"Player 1 - What would you like your mark to be? (x/o): ")
+    player_2_marker = 'x' if player1_marker == 'o' else 'o'
+    print(f"Great, player 1 has marker {player1_marker}. Player 2, your marker must then be {player_2_marker}.")
+    return player1_marker, player_2_marker
+
+
+def ask_player_place_marker(player: Player) -> tuple[int, int]:
+    marker_position = input(f"Player {player.number}, where would you like to place a marker? (x, y): ")
+    x = int(marker_position.split(',')[0].strip())
+    y = int(marker_position.split(',')[1].strip())
+    return x, y
 
 
 def ask_play_again() -> bool:
