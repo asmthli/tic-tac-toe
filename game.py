@@ -30,7 +30,7 @@ class Game:
 
         game_over = False
         while not game_over:
-            x, y = user_interface.ask_player_place_marker(self.current_player)
+            x, y = user_interface.ask_player_place_marker(self.current_player, self.grid)
             self.grid.place_marker(self.current_player, x, y)
             self.grid.markers_placed += 1
             user_interface.show_grid(self.grid)

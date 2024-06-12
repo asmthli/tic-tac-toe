@@ -1,5 +1,6 @@
 from grid import Grid
 from player import Player
+import re
 
 
 def show_welcome() -> None:
@@ -21,10 +22,11 @@ def show_game_over(player1: Player, player2: Player) -> None:
 
 def get_grid_size() -> int:
     size = input("What size grid would you like to play on?: ")
-    if size.isdigit():
+    if size.isdigit() and int(size) > 1:
+        size = int(size)
         return int(size)
     else:
-        print("\nInvalid input. Please enter an integer grid size.\n")
+        print("\nInvalid input. Please enter an integer grid size of at least 2\n")
         return get_grid_size()
 
 
@@ -39,11 +41,21 @@ def get_player_markers() -> tuple[str, str]:
         return get_player_markers()
 
 
-def ask_player_place_marker(player: Player) -> tuple[int, int]:
+def ask_player_place_marker(player: Player, grid: Grid) -> tuple[int, int]:
+    marker_placement_regex = "[0-9]+, [0-9]+"
+
     marker_position = input(f"Player {player.number}, where would you like to place a marker? (row, column): ")
-    x = int(marker_position.split(',')[0].strip())
-    y = int(marker_position.split(',')[1].strip())
-    return x, y
+    if re.search(marker_placement_regex, marker_position):
+        x = int(marker_position.split(',')[0].strip())
+        y = int(marker_position.split(',')[1].strip())
+        if 0 <= x < grid.size and 0 <= y < grid.size:
+            return x, y
+        else:
+            print("\nInvalid input. Ensure your numbers indices are within the grid size.\n")
+            return ask_player_place_marker(player, grid)
+    else:
+        print("\nInvalid input. Please input in the form row, column.\n")
+        return ask_player_place_marker(player, grid)
 
 
 def ask_play_again() -> bool:
