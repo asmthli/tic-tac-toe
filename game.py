@@ -31,6 +31,13 @@ class Game:
         game_over = False
         while not game_over:
             x, y = user_interface.ask_player_place_marker(self.current_player, self.grid)
+
+            cell_occupied = self.grid.check_cell_occupied(x, y)
+            while cell_occupied:
+                user_interface.show_occupied_warning()
+                x, y = user_interface.ask_player_place_marker(self.current_player, self.grid)
+                cell_occupied = self.grid.check_cell_occupied(x, y)
+
             self.grid.place_marker(self.current_player, x, y)
             self.grid.markers_placed += 1
             user_interface.show_grid(self.grid)

@@ -60,3 +60,9 @@ class Grid:
             return True
         else:
             return False
+
+    def check_cell_occupied(self, x: int, y: int) -> bool:
+        if self.array[y][x] == "_":
+            return False
+        else:
+            return True

@@ -20,6 +20,10 @@ def show_game_over(player1: Player, player2: Player) -> None:
     print(f"GAME OVER! Score: P1: {player1.score} P2: {player2.score}")
 
 
+def show_occupied_warning() -> None:
+    print("Cell occupied. Please choose an unoccupied cell.\n")
+
+
 def get_grid_size() -> int:
     size = input("What size grid would you like to play on?: ")
     if size.isdigit() and int(size) > 1:
