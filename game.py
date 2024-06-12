@@ -9,8 +9,8 @@ user_interface.show_instructions()
 player1_marker, player2_marker = user_interface.get_player_markers()
 players = [Player(number=1, marker=player1_marker), Player(number=2, marker=player2_marker)]
 
-grid_rows, grid_columns = user_interface.get_grid_size()
-grid = Grid(grid_rows, grid_columns)
+size = user_interface.get_grid_size()
+grid = Grid(size)
 
 user_interface.show_begin()
 

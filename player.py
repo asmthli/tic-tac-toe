@@ -3,4 +3,3 @@ class Player:
         self.number = number
         self.marker = marker
         self.score = 0
-

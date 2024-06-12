@@ -1,15 +1,10 @@
-from player import Player
-
-
 class Grid:
-    def __init__(self, height, width):
-        self.height = height
-        # TODO change to size. Game only really makes sense on an nxn grid.
-        self.width = width
-        self.total_cells = height * width
+    def __init__(self, size):
+        self.size = size
+        self.total_cells = size * size
         self.array = []
-        for _ in range(height):
-            self.array.append(['_'] * width)
+        for _ in range(size):
+            self.array.append(['_'] * size)
 
     def place_marker(self, player_, x, y):
         self.array[y][x] = player_.marker
@@ -22,29 +17,29 @@ class Grid:
         if x != y:
             return False
         else:
-            for i in range(self.width):
+            for i in range(self.size):
                 if not self.array[i][i] == placed_marker:
                     break
-                elif i == self.width - 1:
+                elif i == self.size - 1:
                     return True
 
-            for i in range(self.width):
-                if not self.array[self.height - 1 - i][i] == placed_marker:
+            for i in range(self.size):
+                if not self.array[self.size - 1 - i][i] == placed_marker:
                     break
-                elif i == self.width - 1:
+                elif i == self.size - 1:
                     return True
             return False
 
     def check_vertical_win(self, x: int, y: int) -> bool:
         placed_marker = self.array[y][x]
-        for i in range(self.height):
+        for i in range(self.size):
             if self.array[i][x] != placed_marker:
                 return False
         return True
 
     def check_horizontal_win(self, x: int, y: int) -> bool:
         placed_marker = self.array[y][x]
-        for i in range(self.width):
+        for i in range(self.size):
             if self.array[y][i] != placed_marker:
                 return False
         return True
