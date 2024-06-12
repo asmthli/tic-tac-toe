@@ -18,17 +18,16 @@ markers_placed = 0
 game_over = False
 current_player = random.choice(players)
 while not game_over:
-    column_choice, row_choice = user_interface.ask_player_place_marker(current_player)
-    grid.place_marker(current_player, column_choice, row_choice)
+    x, y = user_interface.ask_player_place_marker(current_player)
+    grid.place_marker(current_player, x, y)
     markers_placed += 1
     user_interface.show_grid(grid)
-
 
     if markers_placed == grid.total_cells:
         user_interface.show_game_over(players[0], players[1])
         game_over = not user_interface.ask_play_again()
     else:
-        winner = grid.check_if_won(current_player, column_choice, row_choice)
+        winner = grid.check_if_won(x, y)
         if winner:
             print("Winner!")
             current_player.score += 1
