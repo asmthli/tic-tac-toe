@@ -19,10 +19,9 @@ def show_game_over(player1: Player, player2: Player) -> None:
     print(f"GAME OVER! Score: P1: {player1.score} P2: {player2.score}")
 
 
-def get_grid_size() -> (int, int):
-    rows = int(input("How many rows would you like your grid to have?: "))
-    columns = int(input("How many columns would you like your grid to have?: "))
-    return rows, columns
+def get_grid_size() -> int:
+    size = int(input("What size grid would you like to play on?: "))
+    return size
 
 
 def get_player_markers() -> tuple[str, str]:
@@ -56,15 +55,12 @@ def make_grid_cell(fill: str = "") -> str:
 
 
 def show_grid(grid: Grid) -> None:
-    print("---" * grid.width)
+    print("---" * grid.size)
 
-    for j in range(grid.height):
+    for j in range(grid.size):
         row = ""
-        for i in range(grid.width):
+        for i in range(grid.size):
             mark = grid.get_marker(i, j)
             row += make_grid_cell(mark)
         print(row)
-        print("---" * grid.width)
-
-
-show_grid(Grid(3, 3))
+        print("---" * grid.size)

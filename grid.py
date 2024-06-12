@@ -5,6 +5,7 @@ class Grid:
         self.array = []
         for _ in range(size):
             self.array.append(['_'] * size)
+        self.markers_placed = 0
 
     def place_marker(self, player_, x, y):
         self.array[y][x] = player_.marker
@@ -43,6 +44,12 @@ class Grid:
             if self.array[y][i] != placed_marker:
                 return False
         return True
+
+    def is_full(self) -> bool:
+        if self.markers_placed == self.total_cells:
+            return True
+        else:
+            return False
 
     def check_if_won(self, x: int, y: int) -> bool:
         if self.check_diagonal_win(x, y):
